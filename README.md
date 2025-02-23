@@ -1,7 +1,5 @@
 # **Flash Sale System Requirements Document**
 
-[Flash Sale System Requirements Document](#flash-sale-system-requirements-document)
-
 [1. Project Overview](#1-project-overview)
 
 [2. Tech Stack](#2-tech-stack)
@@ -21,8 +19,6 @@
 [Load Balancing with NGINX Reverse Proxy](#load-balancing-with-nginx-reverse-proxy)
 
 [Database Choice (MySQL)](#database-choice-mysql)
-
-[Backend Scalability](https://docs.google.com/document/d/1B-zBWv6OXqu29dtYTHLfPztLwhIBGrGboWW63jQkod8/edit?tab=t.vm3kthfketa7#heading=h.lcekw853dpwz)
 
 [Deployment Strategy and Challenges](#deployment-strategy-and-challenges)
 
