@@ -202,8 +202,6 @@ Given the system’s need for **strict transactional control**, **accurate inven
 
 ### **Deployment Strategy and Challenges**
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcwozpZRWHCVfMSTg8lE6XVABKGJdMmzJInRf-o1EwlJG9vNravMC_WeywYyvCE5C7Wv_optylof6YaDg2bEsViJ2MvgDR_VY5LNmjOdmF9jt9qEZ0rdeZUGHrTO_9rPI-jxEDHDQ?key=gh4idSIF-ZqgJoW6XwLW-efd)
-
 The current development environment is hosted on an **AWS EC2 instance** running **Kubernetes**, utilizing an **NGINX Ingress Controller** to manage and route traffic for the frontend. All middleware and backend services are containerized and deployed within the Kubernetes cluster, providing efficient resource management and streamlined deployment workflows. This setup simplifies development by enabling direct external access without requiring additional networking configurations, such as a NAT gateway, offering a cost-effective solution for development and hands-on experience in managing Kubernetes workloads manually. Additionally, **AWS S3** is used for storing coupon images, eliminating the need for local storage and enabling seamless media asset access across different services.
 
 Despite its effectiveness for development and testing, this configuration has several critical limitations regarding scalability, availability, and security. The current deployment runs within a single EC2 instance, limiting **horizontal scaling** and **high availability**. This constraint prevents the system from dynamically adjusting to increased traffic, risking performance degradation as resource limits are reached. Additionally, if the EC2 instance fails, the entire application becomes unavailable, resulting in service downtime and disrupted continuity.
