@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flashsale-backend
+  namespace: flashsale
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: xinningb/flashsale_backend:v1
+        ports:
+        - containerPort: 8081
+        env:
+        - name: SPRING_APPLICATION_NAME
+          value: "SimpleFlashSale"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://mysql:3306/SimpleFlashSale"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "123456"
+        - name: SPRING_JPA_DATABASE_PLATFORM
+          value: "org.hibernate.dialect.MySQLDialect"
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: "update"
+        - name: SPRING_SQL_INIT_MODE
+          value: "always"
+        - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+          value: "http://keycloak:8080/realms/SimpleFlashSale"
+        - name: KEYCLOAK_AUTH_SERVER_URL
+          value: "http://keycloak:8080"
+        - name: KEYCLOAK_REALM
+          value: "SimpleFlashSale"
+        - name: KEYCLOAK_CLIENT_ID
+          value: "SimpleFlashSaleClient"
+        - name: KEYCLOAK_CLIENT_SECRET
+          value: "Orm6SyrIN5W3t7mQBjwiH6xjvycZ774e"
+        - name: KEYCLOAK_ADMIN_USERNAME
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "admin"
+        - name: REDIS_URL
+          value: "redis://redis:6379"
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka:29092"
+        - name: KAFKA_TOPIC_PAYMENT
+          value: "payment_orders"
+        - name: SERVER_PORT
+          value: "8081"

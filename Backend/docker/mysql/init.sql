@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS SimpleFlashSale;
+CREATE DATABASE IF NOT EXISTS SimpleFlashSaleKeyCloak;
+
+
