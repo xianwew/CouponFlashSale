@@ -33,18 +33,60 @@
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfsg5o0GB2iwQsglIKuqRNpvy8avkVbotb5IXASLmsthyji_8KwbVFLH6SzGQ2tshGeyMbRxiYgvJT05B6uuTqLna90rIntWlabr-0VnRJpO64Xk8fFHqmeonCA_rhX41Waumh1?key=gh4idSIF-ZqgJoW6XwLW-efd)
 
-The Flash Sale System is designed to facilitate high-speed coupon purchases during flash sales while ensuring performance, security, and data consistency. Users can register and log in using their email without verification, browse available coupons, and attempt to purchase them in real time. The system does not support password modification or payment processing, as the primary focus is on managing high-demand, time-sensitive coupon sales efficiently.
+The **Flash Sale System** is designed to enable **high-speed coupon purchases** during flash sales while prioritizing **performance**, **security**, and **data consistency**. Users can register and log in using their email without verification, browse available coupons, and attempt real-time purchases. The system does not support password modification or payment processing, as its primary focus is on efficiently managing **high-demand, time-sensitive coupon sales**.
 
-A major challenge in building this system is handling high concurrency while maintaining strong consistency. Flash sales generate massive user requests within a short period, leading to risks such as database overload, overselling of coupons, and race conditions in order processing. To mitigate these challenges, the system relies on a combination of **Redis and Lua scripting** for atomic operations, **Kafka, Redis Pub/Sub, and WebSocket** for asynchronous processing, and **multi-level caching mechanisms** to reduce database queries. Currently, the deployment runs on **AWS EC2**, with three backend servers deployed on a single EC2 instance within a public subnet, running in **Docker containers**. This setup enables **parallel processing and load distribution**. However, future plans include migrating the system to **Amazon EKS** within a **private subnet** to enhance scalability, security, and high availability.
+A major challenge in developing this system is handling **high concurrency** while ensuring **strong consistency**. Flash sales generate a surge of user requests within a very short period, creating risks such as **database overload**, **overselling coupons**, and **race conditions** during order processing. To mitigate these issues, the system employs **Redis** and **Lua scripting** for atomic operations, combined with **Kafka**, **Redis Pub/Sub**, and **WebSocket** for **asynchronous processing**. Additionally, a **multi-level caching** strategy is implemented to minimize direct database queries, improving overall performance.
+
+The current deployment runs on an **AWS EC2 instance** utilizing **Kubernetes** for container orchestration. An **NGINX Ingress Controller** acts as a **reverse proxy** to host the frontend and route traffic effectively across services. This setup supports **parallel processing** and **load distribution**, allowing for efficient handling of concurrent requests.
+
+While effective for development and testing, the existing setup faces limitations in **horizontal scalability**, **security**, and **high availability**. Currently, **auto-scaling is not enabled**, meaning the system cannot dynamically adjust to fluctuations in traffic, which could lead to resource constraints under heavy load. To address these challenges, future plans involve migrating the system to **Amazon EKS** within a **private subnet**. This migration will improve security by isolating backend services from public exposure and enhance availability by distributing workloads across multiple **availability zones**, ensuring a more **robust**, **secure**, and **resilient infrastructure** capable of handling high-traffic workloads effectively.
 
 
 ## **2. Tech Stack**
 
-The frontend is built using **Vue.js and Bootstrap**, providing a user-friendly interface. The backend is developed with **Spring Boot**, utilizing **Spring Data JPA** for database interactions and **Spring Security with Keycloak** for authentication. **MySQL** is used as the primary database due to its **ACID compliance**, ensuring transaction integrity during coupon sales.
+**Frontend:**
 
-For caching and high-speed inventory management, the system integrates **Redis** with **Lua scripting** to ensure atomic stock deductions and prevent overselling. A **multi-layer caching strategy** combining **Caffeine for local memory caching and Redis for distributed caching** reduces query load on MySQL. **Kafka, WebSocket, and Redis Pub/Sub** work together to manage asynchronous order processing and updates, ensuring a seamless payment experience.
+- Built with **Vue.js** and **Bootstrap** for a responsive, user-friendly interface.
 
-Deployment is currently on **AWS**, with **S3 for image storage** and **Kubernetes running inside an EC2 instance** within a public subnet. While **EKS was not chosen** due to cost considerations and the project's personal training purpose, a migration is planned to ensure proper **horizontal scaling, high availability, and security**. **NGINX Ingress Controller serves as a reverse proxy** to handle frontend hosting and balances backend requests efficiently.
+**Backend:**
+
+- Developed using **Spring Boot** for high-performance RESTful services.
+
+- **Spring Data JPA** for efficient database interactions.
+
+- **Spring Security** integrated with **Keycloak** for robust authentication and authorization.
+
+**Database:**
+
+- **MySQL** as the primary database, ensuring **ACID compliance** for transaction integrity during coupon sales.
+
+**Caching and Inventory Management:**
+
+- **Redis** with **Lua scripting** for atomic stock deductions and prevention of overselling.
+
+- Multi-layer caching strategy:
+
+  - **Caffeine** for local in-memory caching.
+
+  - **Redis** for distributed caching, reducing MySQL query load.
+
+**Asynchronous Processing:**
+
+- **Kafka**, **Redis Pub/Sub**, and **WebSocket** for managing real-time asynchronous order processing and updates.
+
+**Deployment and Infrastructure:**
+
+- Hosted on **AWS EC2** running **Kubernetes** within a public subnet.
+
+- **AWS S3** for efficient image storage and retrieval.
+
+- **NGINX Ingress Controller** as a reverse proxy for frontend hosting and backend request load balancing.
+
+**Planned Migration:**
+
+- Future migration to **Amazon EKS** for enhanced **horizontal scaling**, **high availability**, and **improved security**.
+
+- Current deployment on EC2 was chosen for **cost-efficiency** and **personal training purposes**.
 
 
 ## **3. Design Overview**
