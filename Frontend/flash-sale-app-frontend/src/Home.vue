@@ -43,7 +43,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center p-3" style="margin-top: 0; height: 100px; display: flex; align-items: center; justify-content: center; background-color: #dbdbf0 !important">2025 @Lisa White<a href="https://github.com/Lizwhite8/SimpleTicketFlashSaleFullStack" style="margin-left: 20px;">Project Github</a></footer>
+    <footer class="text-center p-3" style="margin-top: 0; height: 100px; display: flex; align-items: center; justify-content: center; background-color: #dbdbf0 !important">2025 @xianwew<a href="https://github.com/xianwew/CouponFlashSaleFullStack" style="margin-left: 20px;">Project Github</a></footer>
 
     <!-- Components -->
     <LoginPopup @login-success="setUser" />
