@@ -118,7 +118,7 @@ export default {
         }
       } catch (error) {
         console.error("Error purchasing coupon:", error);
-        this.queueSnackbar(`Error: ${error.message}`, "red", 3000);
+        this.queueSnackbar(`${JSON.parse(error.message).message}`, "red", 3000);
         this.isProcessing = false;
       }
     },
