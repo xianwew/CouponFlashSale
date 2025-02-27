@@ -1,11 +1,7 @@
 <template>
   <div class="card d-flex flex-column flex-md-row p-3 m-2 position-relative">
-    <img
-      :src="coupon.imageURL"
-      class="img-fluid responsive-image"
-      style="object-fit: cover"
-    />
-    <div class="d-flex flex-column flex-grow-1 ms-3">
+    <img :src="coupon.imageURL" class="img-fluid responsive-image" style="object-fit: cover" />
+    <div class="d-flex flex-column flex-grow-1 ms-0 ms-md-3">
       <h5 class="coupon-title">{{ coupon.name }}</h5>
       <p class="text-muted">{{ coupon.description }}</p>
       <div class="mt-auto">
@@ -15,11 +11,8 @@
             {{ coupon.quantity }}
           </p>
         </div>
-        <button
-          class="btn btn-primary buy-button"
-          @click="buyCoupon"
-          :disabled="!user || isProcessing || purchasedCoupons.includes(coupon.id)"
-        >
+        <button class="btn btn-primary buy-button" @click="buyCoupon"
+          :disabled="!user || isProcessing || purchasedCoupons.includes(coupon.id)">
           Buy
         </button>
       </div>
@@ -43,7 +36,8 @@
   }
 
   .coupon-title {
-    margin-top: 15px; /* Add margin to the title on small screens */
+    margin-top: 15px;
+    /* Add margin to the title on small screens */
   }
 
   .price-qty {

@@ -167,35 +167,35 @@ services:
     networks:
       - flashsale_network
 
-  flashsale_backend_3:
-    image: flashsale_backend:v1
-    container_name: flashsale_backend_3
-    restart: always
-    ports:
-      - "8083:8081"
-    depends_on:
-      - flashsale_backend_2
-    environment:
-      SPRING_APPLICATION_NAME: SimpleFlashSale
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/SimpleFlashSale
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 123456
-      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_SQL_INIT_MODE: always
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/SimpleFlashSale
-      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080
-      KEYCLOAK_REALM: SimpleFlashSale
-      KEYCLOAK_CLIENT_ID: SimpleFlashSaleClient
-      KEYCLOAK_CLIENT_SECRET: Orm6SyrIN5W3t7mQBjwiH6xjvycZ774e
-      KEYCLOAK_ADMIN_USERNAME: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      REDIS_URL: redis://redis:6379
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      KAFKA_TOPIC_PAYMENT: payment_orders
-      SERVER_PORT: 8081
-    networks:
-      - flashsale_network
+  # flashsale_backend_3:
+  #   image: flashsale_backend:v1
+  #   container_name: flashsale_backend_3
+  #   restart: always
+  #   ports:
+  #     - "8083:8081"
+  #   depends_on:
+  #     - flashsale_backend_2
+  #   environment:
+  #     SPRING_APPLICATION_NAME: SimpleFlashSale
+  #     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/SimpleFlashSale
+  #     SPRING_DATASOURCE_USERNAME: root
+  #     SPRING_DATASOURCE_PASSWORD: 123456
+  #     SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+  #     SPRING_JPA_HIBERNATE_DDL_AUTO: update
+  #     SPRING_SQL_INIT_MODE: always
+  #     SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/SimpleFlashSale
+  #     KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080
+  #     KEYCLOAK_REALM: SimpleFlashSale
+  #     KEYCLOAK_CLIENT_ID: SimpleFlashSaleClient
+  #     KEYCLOAK_CLIENT_SECRET: Orm6SyrIN5W3t7mQBjwiH6xjvycZ774e
+  #     KEYCLOAK_ADMIN_USERNAME: admin
+  #     KEYCLOAK_ADMIN_PASSWORD: admin
+  #     REDIS_URL: redis://redis:6379
+  #     SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+  #     KAFKA_TOPIC_PAYMENT: payment_orders
+  #     SERVER_PORT: 8081
+  #   networks:
+  #     - flashsale_network
 
   flashsale_frontend:
     image: flashsale_frontend:v1
@@ -206,7 +206,7 @@ services:
     depends_on:
       - flashsale_backend_1
       - flashsale_backend_2
-      - flashsale_backend_3
+      # - flashsale_backend_3
     networks:
       - flashsale_network
     
